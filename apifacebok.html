@@ -1,0 +1,22 @@
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : 'TU_APP_ID',
+      cookie     : true,
+      xfbml      : true,
+      version    : 'v19.0'
+    });
+    console.log("SDK listo");
+  };
+
+  function loginFacebook() {
+    FB.login(function(response) {
+      if (response.authResponse) {
+        FB.api('/me', {fields: 'name,email'}, function(user) {
+          document.getElementById('info').innerHTML =
+            'Hola ' + user.name + '<br>Email: ' + user.email;
+        });
+      }
+    }, {scope: 'public_profile,email'});
+  }
+</script>
